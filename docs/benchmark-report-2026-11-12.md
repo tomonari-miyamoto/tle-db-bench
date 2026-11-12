@@ -94,13 +94,13 @@ ClickHouse with one client is the only combination that met the target.
 | TimescaleDB, psycopg 3 binary COPY | 1 | 25.57 | 25.89 | 0.4 million | No |
 | TimescaleDB, psycopg 3 binary COPY | 4 | 94.59 | 116.80 | 0.1 million each | No |
 
-Times are time to last row. Time to first batch was under 0.2 s on every single-client path, so all three paths stream rather than buffer the whole result. Both databases returned identical row counts.
+Times are time to last row. Median time to first batch was under 0.2 s on every single-client path, so all three paths stream rather than buffer the whole result. Both databases returned identical row counts.
 
 ### Rerun of the TimescaleDB ADBC path
 
 The single-client TimescaleDB ADBC figure above is pessimistic: a rerun of ten fetches took 5.4–7.1 s, about 6 s median.
 
-In the full run, the five fetches took 15.2, 14.4, 8.4, 7.5 and 7.4 s. That test started straight after the four-client psycopg test, which had kept the machine busy for several minutes; the two slow fetches were most likely leftover load, though the cause was not confirmed. The rerun, on an otherwise idle machine, gave 5.41, 5.43, 5.54, 6.06, 5.80, 6.09, 6.19, 6.33, 7.10 and 6.53 s. Times rose gradually across the ten fetches; the laptop has no fan, so heat throttling is a plausible cause.
+In the full run, the five fetches took 15.2, 14.4, 8.4, 7.5 and 7.4 s. That test ran after about 19 minutes of TimescaleDB psycopg tests (four-client range, single-object history and latest-per-object); the cause of the two slow fetches is not known. The rerun, started on an idle machine, gave 5.41, 5.43, 5.54, 6.06, 5.80, 6.09, 6.19, 6.33, 7.10 and 6.53 s. Times rose gradually across the ten fetches; the laptop has no fan, so heat throttling is a plausible cause.
 
 Even the fastest rerun fetch (5.4 s) missed the target, by about 0.4 s.
 
@@ -154,11 +154,11 @@ The code is in this repository, hosted privately at https://github.com/tomonari-
 | Resource | Full run (100 million rows) | Smoke run (1 million rows) |
 | --- | --- | --- |
 | CPU | 8 cores or more (4 per database container, plus the client) | 4 cores |
-| Memory | 32 GB recommended (8 GB per database container, plus the client) | 8 GB |
+| Memory | 32 GB recommended (8 GB per database container, plus the client) | 16 GB with the default limits; less if MEM_LIMIT and TS_TUNE_MEMORY are lowered in .env (not tested) |
 | Free disk | About 80 GB recommended | About 2 GB |
 | Time | About 80 minutes | A few minutes |
 
-The full run produced 9.8 GB of generated Parquet files, 9.9 GB in ClickHouse and 16.3 GB in TimescaleDB. The 80 GB figure is an estimate that adds headroom for TimescaleDB's uncompressed data before compression and for ClickHouse's rewrite during optimize; peak disk use was not measured.
+The full run produced 10.5 GB of generated Parquet files, 9.9 GB in ClickHouse and 16.3 GB in TimescaleDB. The 80 GB figure is an estimate that adds headroom for TimescaleDB's uncompressed data before compression and for ClickHouse's rewrite during optimize; peak disk use was not measured.
 
 The per-container CPU and memory limits are set in `.env` (`CPU_LIMIT`, `MEM_LIMIT`) and apply identically to both databases. On a container runtime that uses a VM (Docker Desktop, OrbStack), give the VM at least 16 GB of memory and 8 CPUs for the default limits.
 
@@ -243,9 +243,9 @@ The per-container CPU and memory limits are set in `.env` (`CPU_LIMIT`, `MEM_LIM
 - `load` refuses to load into a table that already has rows unless `--recreate` or `--append` is given, so data is not duplicated by accident.
 - `run` stops early if a table's row count does not match the dataset.
 - A scaled-down run shows "n/a" instead of PASS/FAIL, because the verdict only applies to 10-million-row fetches.
-- `run --paths adbc-postgresql-arrow --concurrency 1 --skip-secondary` reruns a single path; `--reps` sets the number of fetches.
+- `run --paths adbc-postgresql-arrow --concurrency 1 --skip-secondary` reruns a single path when these options are added to the run command in step 6 (use a different output file to keep the earlier results); `--reps` sets the number of fetches.
 - `run --cold` restarts the database containers before each fetch. This clears database caches but not the operating system's file cache.
-- To test against database servers on other machines, set `CH_HOST` and `PG_HOST` in `.env`. That is the way to include a real network in the measurement.
+- To test against database servers on other machines, set `CH_HOST` and `PG_HOST` in `.env`. The supplied Compose file publishes both database ports on 127.0.0.1 only, so on the database servers the port bindings must first be opened to the client (or a tunnel used). That is the way to include a real network in the measurement.
 - The [README](../README.md) lists all options.
 
 ## Recommended next steps
