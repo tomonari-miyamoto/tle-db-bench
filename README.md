@@ -8,6 +8,9 @@ Fetch paths compared: ClickHouse via `clickhouse-connect` Arrow streaming; Times
 `psycopg` 3 binary COPY (decoded in Python, batched to Arrow) and via the ADBC PostgreSQL
 driver (Arrow). Secondary queries: single-object history and latest-per-object as of T.
 
+Results from the first full run, with system requirements and step-by-step instructions:
+[docs/benchmark-report-2026-11-12.md](docs/benchmark-report-2026-11-12.md).
+
 ## Setup
 
 ```bash
