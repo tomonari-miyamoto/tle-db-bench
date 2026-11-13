@@ -1,0 +1,82 @@
+#!/bin/bash
+# DB host bootstrap (Ubuntu 24.04). Rendered by Terraform templatefile().
+set -euo pipefail
+exec > >(tee -a /var/log/tlebench-bootstrap.log) 2>&1
+export DEBIAN_FRONTEND=noninteractive
+
+echo "${bucket}" > /etc/tlebench-bucket
+
+# Data device: Nitro exposes the EBS volume as NVMe. Use the first non-root disk
+# that carries no filesystem or mountpoint; on a re-run reuse the labelled device.
+find_device() {
+  local dev=""
+  for _ in $(seq 1 60); do
+    if [ -e /dev/disk/by-label/tlebench-data ]; then
+      readlink -f /dev/disk/by-label/tlebench-data
+      return 0
+    fi
+    dev=$(lsblk -dno NAME,TYPE | awk '$2 == "disk" {print "/dev/" $1}' | while read -r d; do
+      if [ -z "$(lsblk -no MOUNTPOINT,FSTYPE "$d" | tr -d '[:space:]')" ]; then
+        echo "$d"
+        break
+      fi
+    done)
+    if [ -n "$dev" ]; then
+      echo "$dev"
+      return 0
+    fi
+    sleep 5
+  done
+  return 1
+}
+
+DEV=$(find_device || true)
+if [ -z "$DEV" ]; then
+  echo "data device not found" >&2
+  exit 1
+fi
+
+if ! blkid "$DEV" > /dev/null 2>&1; then
+  mkfs.ext4 -L tlebench-data "$DEV"
+fi
+mkdir -p /data
+UUID=$(blkid -s UUID -o value "$DEV")
+if ! grep -q "$UUID" /etc/fstab; then
+  echo "UUID=$UUID /data ext4 defaults,nofail 0 2" >> /etc/fstab
+fi
+mountpoint -q /data || mount /data
+
+# Docker from Docker's apt repo: https://docs.docker.com/engine/install/ubuntu/
+apt-get update
+apt-get install -y ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+. /etc/os-release
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $VERSION_CODENAME stable" > /etc/apt/sources.list.d/docker.list
+apt-get update
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin unzip
+
+# AWS CLI v2 (official zip installer), used to fetch the code tarball from S3
+tmp=$(mktemp -d)
+curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$tmp/awscliv2.zip"
+unzip -q "$tmp/awscliv2.zip" -d "$tmp"
+"$tmp/aws/install" --update
+rm -rf "$tmp"
+
+mkdir -p /data/docker /etc/docker
+cat > /etc/docker/daemon.json <<'JSON'
+{
+  "data-root": "/data/docker"
+}
+JSON
+systemctl enable docker
+systemctl restart docker
+usermod -aG docker ubuntu
+
+docker pull clickhouse/clickhouse-server:25.8
+docker pull timescale/timescaledb:2.22.1-pg17
+
+mkdir -p /data/tlebench
+chown ubuntu:ubuntu /data/tlebench
+echo "bootstrap done"
