@@ -77,6 +77,19 @@ them (step 2 and 3) with `aws s3 cp` and `chmod 600`. Use throwaway passwords.
    `uv run tlebench run --data data/full --cold --out results/<rung>.json`, then
    `uv run tlebench report --results results/<rung>.json --out results/<rung>.md`
    (options in the top-level README). `--recreate` is required on every rung after the first.
+   A full run with `--cold` takes 2.5 to 3.5 h, longer than an SSM command may live, so put the
+   load/run/report commands in a script and start it detached as a transient systemd unit:
+
+   ```bash
+   $S/ssm.sh $CLIENT 'systemd-run --collect --unit=tlebench-full-m -p User=ubuntu \
+     -p WorkingDirectory=/data/tlebench \
+     -p StandardOutput=append:/data/tlebench/results/full-m.log \
+     -p StandardError=append:/data/tlebench/results/full-m.log \
+     /bin/bash -lc /data/tlebench/results/full-m.sh'
+   ```
+
+   Then poll with `$S/ssm.sh $CLIENT 'systemctl is-active tlebench-full-m; tail -3 /data/tlebench/results/full-m.log'`.
+   SSM truncates command output at about 24 KB, so read long files with `grep`/`sed`/`tail` on the host.
 6. Upload results: `aws s3 cp --recursive results/ s3://$BUCKET/results/<rung>/` (the bucket name is in
    `/etc/tlebench-bucket` on both hosts).
 
