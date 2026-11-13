@@ -74,6 +74,11 @@ repetition and waits until it accepts connections. This clears database caches o
 NOT drop the OS page cache. On a Linux host, drop it explicitly (`sync; echo 3 >
 /proc/sys/vm/drop_caches`, root) between reps if you need truly cold numbers.
 
+Set `COLD_RESTART_CMD` (e.g. `deploy/aws/scripts/cold-restart.sh {service}`) to replace the
+local `docker compose restart`; `{service}` is substituted with the service name and the command
+runs through the shell on the client. With it, `--cold` can reach a remote DB host and drop the
+OS page cache there as part of the restart script.
+
 ## Timings
 
 Each fetch is timed from query issue to (a) the first batch in the client and (b) the last row
@@ -101,6 +106,10 @@ the psycopg path is GIL-bound so its concurrency numbers understate a multi-proc
   usually the bottleneck for 10M rows (~2 GB decoded).
 - Docker Desktop / OrbStack on macOS runs a Linux VM with virtualised file I/O and is not
   representative of bare-metal storage or networking.
+- To test a remote DB host, set `CH_HOST` / `PG_HOST` on the client and `BIND_ADDR=0.0.0.0` for
+  compose on the server (default `127.0.0.1`). Docker-published ports bypass host firewalls such
+  as ufw, so restrict them with a cloud security group or network ACL, and change the
+  `change-me-*` passwords first.
 - `CPU_LIMIT` / `MEM_LIMIT` are applied identically to both containers; tune each engine
   (cache sizes, parallelism) separately if the production config differs.
 - `CH_COMPRESS` toggles clickhouse-connect wire compression (default off); set it to match the

@@ -86,9 +86,22 @@ def run_concurrent(
             f.close()
 
 
-def restart_service(db: str, factory: Callable[[], BaseFetcher], timeout_s: float = 180.0) -> None:
-    """Restart the database container and wait until a client can connect (cold-ish run)."""
-    subprocess.run(["docker", "compose", "restart", SERVICES[db]], check=True)
+def restart_service(
+    db: str,
+    factory: Callable[[], BaseFetcher],
+    timeout_s: float = 180.0,
+    cold_restart_cmd: str | None = None,
+) -> None:
+    """Restart the database and wait until a client can connect (cold-ish run).
+
+    With `cold_restart_cmd`, run that shell command instead of the local docker compose restart;
+    "{service}" is replaced by the allow-listed service name.
+    """
+    if cold_restart_cmd:
+        cmd = cold_restart_cmd.replace("{service}", SERVICES[db])
+        subprocess.run(cmd, shell=True, check=True)
+    else:
+        subprocess.run(["docker", "compose", "restart", SERVICES[db]], check=True)
     deadline = time.monotonic() + timeout_s
     while True:
         f = factory()
@@ -207,7 +220,7 @@ def run_benchmark(settings: Settings, m: Manifest, opts: RunOptions) -> dict[str
                         run_concurrent(factory, queries)
                 for rep in range(opts.reps):
                     if state == "cold":
-                        restart_service(db, factory)
+                        restart_service(db, factory, cold_restart_cmd=settings.cold_restart_cmd)
                     wall, results = run_concurrent(factory, queries)
                     record(path, state, rep, wall, results, queries, conc)
                     print(
