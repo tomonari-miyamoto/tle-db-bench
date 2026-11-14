@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "created": "2026-11-13T18:58:02.738069+00:00",
+    "host": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "total_rows": 100000000,
+    "target_rows": 10000000,
+    "seed": 42,
+    "objects": 30000,
+    "reps": 5,
+    "warmups": 1,
+    "variant": "compressed",
+    "cold": false,
+    "concurrency": [
+      1
+    ],
+    "settings": {
+      "ch_host": "10.42.0.157",
+      "ch_port": 8123,
+      "ch_database": "bench",
+      "ch_compress": false,
+      "pg_host": "10.42.0.157",
+      "pg_port": 5432,
+      "pg_database": "bench",
+      "cold_restart_cmd": "deploy/aws/scripts/cold-restart.sh {service}"
+    },
+    "settle": {
+      "clickhouse": {
+        "settled": true,
+        "active_parts": 329,
+        "running_merges": 0,
+        "waited_s": 4.0
+      }
+    },
+    "load": {
+      "load_clickhouse_default": {
+        "db": "clickhouse",
+        "table": "tle",
+        "rows": 100000000,
+        "insert_seconds": 193.245,
+        "ingest_rows_per_s": 517478,
+        "wall_seconds": 358.065,
+        "optimized": true,
+        "optimize_seconds": 147.699,
+        "active_parts": 329
+      },
+      "load_timescaledb_compressed": {
+        "db": "timescaledb",
+        "table": "tle_columnstore",
+        "rows": 100000000,
+        "insert_seconds": 503.128,
+        "ingest_rows_per_s": 198757,
+        "wall_seconds": 825.861,
+        "variant": "compressed",
+        "compress_seconds": 304.393,
+        "maintenance": "ANALYZE",
+        "maintenance_seconds": 0.842
+      }
+    }
+  },
+  "table_sizes": {
+    "clickhouse": {
+      "table": "tle",
+      "bytes_on_disk": 9937959080,
+      "uncompressed_bytes": 20800000000,
+      "parts_rows": 100000000,
+      "active_parts": 329,
+      "row_count": 100000000
+    },
+    "timescaledb": {
+      "table": "tle_columnstore",
+      "bytes_on_disk": 16246456320,
+      "row_count": 100000000
+    }
+  },
+  "row_count_check": {
+    "ok": true,
+    "problems": []
+  },
+  "runs": [
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 4.028336198003672,
+      "fetches": [
+        {
+          "rows": 10000000,
+          "nbytes": 2140000000,
+          "ttfb_s": 0.016895221997401677,
+          "ttlr_s": 4.02817926100397,
+          "window_id": 0,
+          "expected_rows": 10000000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 4.08647613300127,
+      "fetches": [
+        {
+          "rows": 10000000,
+          "nbytes": 2140000000,
+          "ttfb_s": 0.014173009993101005,
+          "ttlr_s": 4.086300536997442,
+          "window_id": 0,
+          "expected_rows": 10000000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 4.142513058002805,
+      "fetches": [
+        {
+          "rows": 10000000,
+          "nbytes": 2140000000,
+          "ttfb_s": 0.019691592999151908,
+          "ttlr_s": 4.1423720689999755,
+          "window_id": 0,
+          "expected_rows": 10000000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 3,
+      "wall_s": 4.089453587002936,
+      "fetches": [
+        {
+          "rows": 10000000,
+          "nbytes": 2140000000,
+          "ttfb_s": 0.018057141001918353,
+          "ttlr_s": 4.089316775003681,
+          "window_id": 0,
+          "expected_rows": 10000000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 4,
+      "wall_s": 4.05989613699785,
+      "fetches": [
+        {
+          "rows": 10000000,
+          "nbytes": 2140000000,
+          "ttfb_s": 0.01734798600227805,
+          "ttlr_s": 4.059748191997642,
+          "window_id": 0,
+          "expected_rows": 10000000
+        }
+      ]
+    }
+  ]
+}

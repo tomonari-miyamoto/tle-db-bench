@@ -1,0 +1,12 @@
+{
+  "db": "timescaledb",
+  "table": "tle_columnstore",
+  "rows": 100000000,
+  "insert_seconds": 513.436,
+  "ingest_rows_per_s": 194766,
+  "wall_seconds": 867.961,
+  "variant": "compressed",
+  "compress_seconds": 336.191,
+  "maintenance": "ANALYZE",
+  "maintenance_seconds": 0.867
+}

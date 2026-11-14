@@ -1,0 +1,1888 @@
+{
+  "meta": {
+    "created": "2026-11-13T08:36:46.644873+00:00",
+    "host": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "total_rows": 1000000,
+    "target_rows": 100000,
+    "seed": 42,
+    "objects": 30000,
+    "reps": 3,
+    "warmups": 1,
+    "variant": "compressed",
+    "cold": true,
+    "concurrency": [
+      1,
+      4
+    ],
+    "settings": {
+      "ch_host": "10.42.0.157",
+      "ch_port": 8123,
+      "ch_database": "bench",
+      "ch_compress": false,
+      "pg_host": "10.42.0.157",
+      "pg_port": 5432,
+      "pg_database": "bench",
+      "cold_restart_cmd": "deploy/aws/scripts/cold-restart.sh {service}"
+    },
+    "settle": {
+      "clickhouse": {
+        "settled": true,
+        "active_parts": 4,
+        "running_merges": 0,
+        "waited_s": 4.0
+      },
+      "timescaledb": {
+        "settled": true,
+        "chunks": 4,
+        "running_vacuums": 0,
+        "waited_s": 4.0
+      }
+    },
+    "load": {
+      "load_clickhouse_default": {
+        "db": "clickhouse",
+        "table": "tle",
+        "rows": 1000000,
+        "insert_seconds": 2.154,
+        "ingest_rows_per_s": 464204,
+        "wall_seconds": 3.806,
+        "optimized": true,
+        "optimize_seconds": 1.477,
+        "active_parts": 4
+      },
+      "load_timescaledb_compressed": {
+        "db": "timescaledb",
+        "table": "tle_columnstore",
+        "rows": 1000000,
+        "insert_seconds": 5.295,
+        "ingest_rows_per_s": 188849,
+        "wall_seconds": 8.511,
+        "variant": "compressed",
+        "compress_seconds": 2.944,
+        "maintenance": "ANALYZE",
+        "maintenance_seconds": 0.026
+      }
+    }
+  },
+  "table_sizes": {
+    "clickhouse": {
+      "table": "tle",
+      "bytes_on_disk": 99380477,
+      "uncompressed_bytes": 208000000,
+      "parts_rows": 1000000,
+      "active_parts": 4,
+      "row_count": 1000000
+    },
+    "timescaledb": {
+      "table": "tle_columnstore",
+      "bytes_on_disk": 162512896,
+      "row_count": 1000000
+    }
+  },
+  "row_count_check": {
+    "ok": true,
+    "problems": []
+  },
+  "runs": [
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.08865476900001568,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.012909091999972588,
+          "ttlr_s": 0.08851281699998026,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.08308251500000097,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.01181932100001859,
+          "ttlr_s": 0.0829470850000007,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.08522301800002197,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.012145644999975502,
+          "ttlr_s": 0.08506854999995994,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.1421820809999872,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.043867963000025156,
+          "ttlr_s": 0.1420445130000303,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.14498339800002213,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.04211741900002153,
+          "ttlr_s": 0.14483259100001078,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.14444936299997835,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.04035079499999483,
+          "ttlr_s": 0.14431096900000284,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.18949065100002827,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.011748805999957312,
+          "ttlr_s": 0.18847729499998422,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.027929950999975972,
+          "ttlr_s": 0.18365443800001913,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.02087835599996879,
+          "ttlr_s": 0.13273108399999956,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.01908108899999661,
+          "ttlr_s": 0.1892317620000199,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.19204600200004052,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.020749644999966677,
+          "ttlr_s": 0.1917541609999489,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.01836224900000616,
+          "ttlr_s": 0.17906694999999218,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.023589555999990353,
+          "ttlr_s": 0.1373940990000051,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.015314551000017218,
+          "ttlr_s": 0.17622064400001136,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.1908050139999773,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.018925608000017746,
+          "ttlr_s": 0.19069708799997898,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.01350911599996607,
+          "ttlr_s": 0.1878519279999864,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.023715507000019898,
+          "ttlr_s": 0.14135166800002708,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.018917685000019446,
+          "ttlr_s": 0.18005698400003212,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.24142228499999874,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.03785702499999388,
+          "ttlr_s": 0.2413102880000224,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.05292113600000903,
+          "ttlr_s": 0.23996984899997642,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.05610533200001555,
+          "ttlr_s": 0.17452108000003363,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.03665857800001504,
+          "ttlr_s": 0.23368579999998929,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.2434177019999879,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.039302331999977014,
+          "ttlr_s": 0.22762660399996548,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.0440014559999895,
+          "ttlr_s": 0.24323102400001062,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.053449559999990015,
+          "ttlr_s": 0.16644442500000878,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.047603599000012764,
+          "ttlr_s": 0.24043944400000328,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.2397630649999769,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.038932776000024205,
+          "ttlr_s": 0.2255186760000356,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.04628304099998104,
+          "ttlr_s": 0.23442178999999896,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.05461822600000232,
+          "ttlr_s": 0.15767899000002217,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.04001637800001845,
+          "ttlr_s": 0.23949340600000824,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.05271356899999091,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.026827917999980855,
+          "ttlr_s": 0.05260997799996403,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.048386660999995,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.02898558299995102,
+          "ttlr_s": 0.048302982999985034,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.052234237999982724,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.02686907700001484,
+          "ttlr_s": 0.05214847199999895,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.14506421300001193,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.07149338499999658,
+          "ttlr_s": 0.14494137200000523,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.14543487299999924,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.07004135400001132,
+          "ttlr_s": 0.14530819400005157,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.14682721299999457,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.07341481999998223,
+          "ttlr_s": 0.1466988099999753,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.32179605000004585,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 0.25449996300000066,
+          "ttlr_s": 0.32165456399997083,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.31364596099996334,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 0.2455729980000001,
+          "ttlr_s": 0.3135074589999931,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.3219055459999822,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 0.2530300609999472,
+          "ttlr_s": 0.321772449999969,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.43894840799998747,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 0.3657871449999561,
+          "ttlr_s": 0.43880683399999043,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.44075737299999673,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 0.3702591310000116,
+          "ttlr_s": 0.44061912900002653,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "clickhouse",
+      "path": "clickhouse-connect-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.435482358999991,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 0.36351644699999497,
+          "ttlr_s": 0.4353479900000252,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.44395027799998843,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.2889374000000089,
+          "ttlr_s": 0.44379508800000167,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.4600270820000105,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.30317080300000043,
+          "ttlr_s": 0.4598980650000044,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.4425854319999871,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.29070477999999866,
+          "ttlr_s": 0.442445532000022,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.5362713499999927,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.3853444540000055,
+          "ttlr_s": 0.536130825999976,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.5402420979999647,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.38993913900003463,
+          "ttlr_s": 0.5401113110000324,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.5321649790000151,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.38216574199998377,
+          "ttlr_s": 0.5320273990000146,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 1.88360706200001,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.680735244999994,
+          "ttlr_s": 1.8833855290000088,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.1968302860000222,
+          "ttlr_s": 1.8803335210000114,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.5700935240000149,
+          "ttlr_s": 1.7054291670000339,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.2108997330000193,
+          "ttlr_s": 1.8657684460000041,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 1.9422049710000238,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.7723477399999865,
+          "ttlr_s": 1.942060129999959,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.4109467680000307,
+          "ttlr_s": 1.794508011000005,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.1780891660000066,
+          "ttlr_s": 1.5936248549999732,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.1665283680000016,
+          "ttlr_s": 1.7547518989999844,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 1.9184939639999925,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.142772089999994,
+          "ttlr_s": 1.4393581150000045,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.4229296799999815,
+          "ttlr_s": 1.892933854999967,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.5957051340000135,
+          "ttlr_s": 1.9181318660000102,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.2104770910000298,
+          "ttlr_s": 1.7351580929999955,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 1.9870041809999748,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.4918936939999412,
+          "ttlr_s": 1.9626361219999353,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.3207183640000721,
+          "ttlr_s": 1.6788938920000192,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.7943142660000149,
+          "ttlr_s": 1.9866485589999456,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.0753937759999417,
+          "ttlr_s": 1.4480638400000316,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 1.9937847009999814,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.6257150950000323,
+          "ttlr_s": 1.9933149500000127,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.316853096999921,
+          "ttlr_s": 1.8274003439998978,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.0925803960000167,
+          "ttlr_s": 1.789903167000034,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.1130758010000363,
+          "ttlr_s": 1.9882303350000257,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 1.9880454589999772,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.6539956670000038,
+          "ttlr_s": 1.987492868000004,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.9473040230000151,
+          "ttlr_s": 1.3101108449999401,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.2612993019999976,
+          "ttlr_s": 1.6182659139999487,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 1.65925112299999,
+          "ttlr_s": 1.9829332150000027,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.03675221700007114,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.0366155599999729,
+          "ttlr_s": 0.036661801999912313,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.0365088129999549,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.03637174200002846,
+          "ttlr_s": 0.03641625000000204,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.036297194999974636,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.03618728899994039,
+          "ttlr_s": 0.03623021399994286,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.8265404929999249,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.8263976319999529,
+          "ttlr_s": 0.8264468789999455,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.8248534780000227,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.8247157539999534,
+          "ttlr_s": 0.8247658139999885,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.8292935799998986,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.8291437320000341,
+          "ttlr_s": 0.829192613000032,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 1.4234523029999764,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.4209090640000568,
+          "ttlr_s": 1.4233114700000442,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 1.3878881980000415,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.3853482900000245,
+          "ttlr_s": 1.3877507010000727,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 1.4413174219999974,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.4388307169999734,
+          "ttlr_s": 1.4411796030000232,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 1.9873805840001069,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.9849494320000076,
+          "ttlr_s": 1.9872555419999571,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 1.982205152000006,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.979778943000042,
+          "ttlr_s": 1.9820707640000137,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "psycopg3-binary-copy",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 1.9887537540000721,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.9861699570000155,
+          "ttlr_s": 1.9886022480000065,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.24963128399997458,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.17014003199994931,
+          "ttlr_s": 0.24863237900001423,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.2379490859999578,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.16213049899999987,
+          "ttlr_s": 0.23694952699997884,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.24036874500006888,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.16403578200004176,
+          "ttlr_s": 0.23938465600008385,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.3496501930000022,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.2482640690000153,
+          "ttlr_s": 0.34871017200009646,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.32589029399991887,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.23024328400003924,
+          "ttlr_s": 0.32495612800005347,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.34842289299990625,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.24547831500001394,
+          "ttlr_s": 0.34746035400007713,
+          "window_id": 0,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.4205308820000937,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.2771367900000996,
+          "ttlr_s": 0.38328346800005875,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.29573149600003035,
+          "ttlr_s": 0.41978731799997604,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.23661626800003432,
+          "ttlr_s": 0.3476561469999524,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.27997107400005916,
+          "ttlr_s": 0.4094854639999994,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.4364842279999266,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.2826250800000025,
+          "ttlr_s": 0.3984735349999937,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.2547378149999986,
+          "ttlr_s": 0.3737240789999987,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.23569058900000073,
+          "ttlr_s": 0.34587037000005694,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.3451142430000118,
+          "ttlr_s": 0.4352257609999697,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.45018274500000643,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.24065593600005286,
+          "ttlr_s": 0.3497397500000261,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.2356480290000036,
+          "ttlr_s": 0.34578748300009465,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.36684458799993536,
+          "ttlr_s": 0.4489856970000119,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.2539362610000353,
+          "ttlr_s": 0.36493477800001983,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.4948638949999804,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.3254309359999752,
+          "ttlr_s": 0.46878678500002025,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.3570564159999776,
+          "ttlr_s": 0.4936684819999755,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.3229243819999965,
+          "ttlr_s": 0.44686077399990154,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.3295582690000174,
+          "ttlr_s": 0.46796282599996175,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.5207431200000201,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.39486133200000495,
+          "ttlr_s": 0.51968617,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.32782372199994825,
+          "ttlr_s": 0.4626838209999278,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.30869527999993807,
+          "ttlr_s": 0.47691663299997344,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.31115202099999806,
+          "ttlr_s": 0.4807765589999917,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "range",
+      "concurrency": 4,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.5164927160000161,
+      "fetches": [
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.32531680800002505,
+          "ttlr_s": 0.4711444089999759,
+          "window_id": 0,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.3676048559999572,
+          "ttlr_s": 0.5154178489999595,
+          "window_id": 1,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.3248960209999723,
+          "ttlr_s": 0.47769269100001566,
+          "window_id": 2,
+          "expected_rows": 100000
+        },
+        {
+          "rows": 100000,
+          "nbytes": 21400000,
+          "ttfb_s": 0.31623401199999535,
+          "ttlr_s": 0.452252188999978,
+          "window_id": 3,
+          "expected_rows": 100000
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 0.03593526700001348,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.035751151999988906,
+          "ttlr_s": 0.03582080199998927,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 0.03621980799994162,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.03606459899992842,
+          "ttlr_s": 0.0361264849999543,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 0.03600268100001358,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.03587146799998209,
+          "ttlr_s": 0.035928513000044404,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 0.7690679800000453,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.7688728530000617,
+          "ttlr_s": 0.7689489690000073,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 0.7716543170000705,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.7714247659999955,
+          "ttlr_s": 0.7715319299999237,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "object",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 0.7709002430000282,
+      "fetches": [
+        {
+          "rows": 32,
+          "nbytes": 6848,
+          "ttfb_s": 0.7706976669999221,
+          "ttlr_s": 0.7707864799999697,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 0,
+      "wall_s": 1.3769680310000467,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.3766855359999681,
+          "ttlr_s": 1.3767815339999743,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 1,
+      "wall_s": 1.3770795940000653,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.3768000030000849,
+          "ttlr_s": 1.3769004670000413,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "warm",
+      "rep": 2,
+      "wall_s": 1.4039953629999218,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.4037064700000883,
+          "ttlr_s": 1.403807800000095,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 0,
+      "wall_s": 1.9101801949999526,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.9099191949999295,
+          "ttlr_s": 1.910014245999946,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 1,
+      "wall_s": 1.916661989999966,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.9163885039999968,
+          "ttlr_s": 1.9164842530000215,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    },
+    {
+      "db": "timescaledb",
+      "path": "adbc-postgresql-arrow",
+      "query": "asof",
+      "concurrency": 1,
+      "state": "cold",
+      "rep": 2,
+      "wall_s": 1.9039456059999793,
+      "fetches": [
+        {
+          "rows": 30000,
+          "nbytes": 6420000,
+          "ttfb_s": 1.9036754740000106,
+          "ttlr_s": 1.9037700350000932,
+          "window_id": 0,
+          "expected_rows": null
+        }
+      ]
+    }
+  ]
+}

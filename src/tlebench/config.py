@@ -36,6 +36,7 @@ class Settings:
     pg_user: str
     pg_password: str
     pg_database: str
+    cold_restart_cmd: str | None = None
 
     @classmethod
     def from_env(cls, environ: Mapping[str, str] | None = None) -> Settings:
@@ -61,6 +62,7 @@ class Settings:
             pg_user=need("PG_USER"),
             pg_password=need("PG_PASSWORD"),
             pg_database=env.get("PG_DATABASE", "bench"),
+            cold_restart_cmd=(env.get("COLD_RESTART_CMD") or "").strip() or None,
         )
 
     def pg_uri(self) -> str:
@@ -79,4 +81,5 @@ class Settings:
             "pg_host": self.pg_host,
             "pg_port": self.pg_port,
             "pg_database": self.pg_database,
+            "cold_restart_cmd": self.cold_restart_cmd,
         }

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import platform
+import shlex
 import subprocess
 import threading
 import time
@@ -86,9 +87,23 @@ def run_concurrent(
             f.close()
 
 
-def restart_service(db: str, factory: Callable[[], BaseFetcher], timeout_s: float = 180.0) -> None:
-    """Restart the database container and wait until a client can connect (cold-ish run)."""
-    subprocess.run(["docker", "compose", "restart", SERVICES[db]], check=True)
+def restart_service(
+    db: str,
+    factory: Callable[[], BaseFetcher],
+    timeout_s: float = 180.0,
+    cold_restart_cmd: str | None = None,
+) -> None:
+    """Restart the database and wait until a client can connect (cold-ish run).
+
+    With `cold_restart_cmd`, run that program instead of the local docker compose restart. It is
+    a program plus optional fixed arguments (split with shlex rules); the allow-listed service
+    name is appended as the last argument. Nothing goes through a shell.
+    """
+    if cold_restart_cmd:
+        argv = [*shlex.split(cold_restart_cmd), SERVICES[db]]
+        subprocess.run(argv, check=True)
+    else:
+        subprocess.run(["docker", "compose", "restart", SERVICES[db]], check=True)
     deadline = time.monotonic() + timeout_s
     while True:
         f = factory()
@@ -207,7 +222,7 @@ def run_benchmark(settings: Settings, m: Manifest, opts: RunOptions) -> dict[str
                         run_concurrent(factory, queries)
                 for rep in range(opts.reps):
                     if state == "cold":
-                        restart_service(db, factory)
+                        restart_service(db, factory, cold_restart_cmd=settings.cold_restart_cmd)
                     wall, results = run_concurrent(factory, queries)
                     record(path, state, rep, wall, results, queries, conc)
                     print(
