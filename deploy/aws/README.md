@@ -44,8 +44,9 @@ is a separate EBS volume and is kept across rungs; `terraform destroy` deletes i
 ## Per-rung procedure
 
 Set `S=deploy/aws/scripts` from the repo root, plus `DB=$(terraform -chdir=deploy/aws output -raw db_instance_id)`,
-`CLIENT=$(terraform -chdir=deploy/aws output -raw client_instance_id)` and
-`IP=$(terraform -chdir=deploy/aws output -raw db_private_ip)`.
+`CLIENT=$(terraform -chdir=deploy/aws output -raw client_instance_id)`,
+`IP=$(terraform -chdir=deploy/aws output -raw db_private_ip)` and
+`BUCKET=$(terraform -chdir=deploy/aws output -raw bucket_name)`.
 
 Bootstrap takes a few minutes after `apply`. Before step 2, wait until both hosts report
 `bootstrap done`: `$S/ssm.sh $DB 'grep -q "bootstrap done" /var/log/tlebench-bootstrap.log'`
