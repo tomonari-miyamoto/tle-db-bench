@@ -1,0 +1,7 @@
+settle clickhouse: {'settled': True, 'active_parts': 329, 'running_merges': 0, 'waited_s': 4.0}
+clickhouse-connect-arrow range c=1 warm rep=0: 5.04s
+clickhouse-connect-arrow range c=1 warm rep=1: 5.05s
+clickhouse-connect-arrow range c=1 warm rep=2: 4.97s
+clickhouse-connect-arrow range c=1 warm rep=3: 5.03s
+clickhouse-connect-arrow range c=1 warm rep=4: 5.00s
+wrote results/diag-m2.json

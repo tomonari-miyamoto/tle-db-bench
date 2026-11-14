@@ -352,6 +352,10 @@ harness is unchanged and the laptop report describes the procedure.
 
 ## How to read these results
 
+- **Raw data.** Every number here comes from `results-aws/{s,m,l}/` in this repository: the
+  `full-<rung>.json` and `.md` files written by `tlebench run` and `report`, the run logs, the
+  iperf3 JSON, the load timings and the post-run diagnostics. Paths such as `results/full-m.json`
+  inside the logs and scripts are where the files lived on the client host.
 - **Cloud instance, not the final server.** The rungs are a way to measure how the benchmark
   scales with cores, memory and network. An on-premises server with the same physical core count
   and a faster clock should do at least as well; one with fewer cores or a slower disk may not.

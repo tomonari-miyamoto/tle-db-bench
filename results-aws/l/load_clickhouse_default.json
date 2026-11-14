@@ -1,0 +1,11 @@
+{
+  "db": "clickhouse",
+  "table": "tle",
+  "rows": 100000000,
+  "insert_seconds": 193.245,
+  "ingest_rows_per_s": 517478,
+  "wall_seconds": 358.065,
+  "optimized": true,
+  "optimize_seconds": 147.699,
+  "active_parts": 329
+}

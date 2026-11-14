@@ -1,0 +1,430 @@
+[2026-11-13T12:37:21Z] load start
+{"db": "clickhouse", "table": "tle", "rows": 100000000, "insert_seconds": 200.589, "ingest_rows_per_s": 498533, "wall_seconds": 374.649, "optimized": true, "optimize_seconds": 156.807, "active_parts": 329}
+{"db": "timescaledb", "table": "tle_columnstore", "rows": 100000000, "insert_seconds": 513.436, "ingest_rows_per_s": 194766, "wall_seconds": 867.961, "variant": "compressed", "compress_seconds": 336.191, "maintenance": "ANALYZE", "maintenance_seconds": 0.867}
+[2026-11-13T12:58:06Z] load done
+[2026-11-13T12:58:06Z] run start
+settle clickhouse: {'settled': True, 'active_parts': 329, 'running_merges': 0, 'waited_s': 4.0}
+settle timescaledb: {'settled': True, 'chunks': 334, 'running_vacuums': 0, 'waited_s': 4.1}
+clickhouse-connect-arrow range c=1 warm rep=0: 4.82s
+clickhouse-connect-arrow range c=1 warm rep=1: 4.81s
+clickhouse-connect-arrow range c=1 warm rep=2: 4.85s
+clickhouse-connect-arrow range c=1 warm rep=3: 4.82s
+clickhouse-connect-arrow range c=1 warm rep=4: 4.86s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow range c=1 cold rep=0: 4.99s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow range c=1 cold rep=1: 4.90s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow range c=1 cold rep=2: 4.90s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow range c=1 cold rep=3: 4.93s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow range c=1 cold rep=4: 4.90s
+clickhouse-connect-arrow range c=4 warm rep=0: 10.79s
+clickhouse-connect-arrow range c=4 warm rep=1: 10.92s
+clickhouse-connect-arrow range c=4 warm rep=2: 10.92s
+clickhouse-connect-arrow range c=4 warm rep=3: 11.01s
+clickhouse-connect-arrow range c=4 warm rep=4: 11.07s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow range c=4 cold rep=0: 12.30s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow range c=4 cold rep=1: 12.20s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow range c=4 cold rep=2: 11.69s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow range c=4 cold rep=3: 11.83s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow range c=4 cold rep=4: 11.63s
+clickhouse-connect-arrow object c=1 warm rep=0: 2.47s
+clickhouse-connect-arrow object c=1 warm rep=1: 2.58s
+clickhouse-connect-arrow object c=1 warm rep=2: 2.58s
+clickhouse-connect-arrow object c=1 warm rep=3: 2.59s
+clickhouse-connect-arrow object c=1 warm rep=4: 2.49s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow object c=1 cold rep=0: 12.79s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow object c=1 cold rep=1: 13.06s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow object c=1 cold rep=2: 13.05s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+clickhouse-connect-arrow object c=1 cold rep=3: 11.87s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow object c=1 cold rep=4: 12.23s
+clickhouse-connect-arrow asof c=1 warm rep=0: 12.83s
+clickhouse-connect-arrow asof c=1 warm rep=1: 12.68s
+clickhouse-connect-arrow asof c=1 warm rep=2: 12.70s
+clickhouse-connect-arrow asof c=1 warm rep=3: 12.68s
+clickhouse-connect-arrow asof c=1 warm rep=4: 12.74s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+Unexpected Http Driver Exception
+clickhouse-connect-arrow asof c=1 cold rep=0: 20.68s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow asof c=1 cold rep=1: 20.70s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow asof c=1 cold rep=2: 20.67s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow asof c=1 cold rep=3: 20.75s
+
+ Container tlebench-clickhouse-1 Restarting 
+ Container tlebench-clickhouse-1 Started 
+
+Unexpected Http Driver Exception
+clickhouse-connect-arrow asof c=1 cold rep=4: 20.50s
+psycopg3-binary-copy range c=1 warm rep=0: 44.80s
+psycopg3-binary-copy range c=1 warm rep=1: 45.22s
+psycopg3-binary-copy range c=1 warm rep=2: 44.31s
+psycopg3-binary-copy range c=1 warm rep=3: 46.59s
+psycopg3-binary-copy range c=1 warm rep=4: 44.03s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=1 cold rep=0: 43.90s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=1 cold rep=1: 43.68s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=1 cold rep=2: 43.71s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=1 cold rep=3: 45.45s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=1 cold rep=4: 43.13s
+psycopg3-binary-copy range c=4 warm rep=0: 194.34s
+psycopg3-binary-copy range c=4 warm rep=1: 193.98s
+psycopg3-binary-copy range c=4 warm rep=2: 192.81s
+psycopg3-binary-copy range c=4 warm rep=3: 192.61s
+psycopg3-binary-copy range c=4 warm rep=4: 191.21s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=4 cold rep=0: 192.25s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=4 cold rep=1: 192.96s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=4 cold rep=2: 191.28s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=4 cold rep=3: 190.97s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy range c=4 cold rep=4: 191.10s
+psycopg3-binary-copy object c=1 warm rep=0: 2.42s
+psycopg3-binary-copy object c=1 warm rep=1: 2.42s
+psycopg3-binary-copy object c=1 warm rep=2: 2.41s
+psycopg3-binary-copy object c=1 warm rep=3: 2.41s
+psycopg3-binary-copy object c=1 warm rep=4: 2.42s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy object c=1 cold rep=0: 74.14s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy object c=1 cold rep=1: 73.98s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy object c=1 cold rep=2: 73.91s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy object c=1 cold rep=3: 74.00s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy object c=1 cold rep=4: 73.92s
+psycopg3-binary-copy asof c=1 warm rep=0: 275.27s
+psycopg3-binary-copy asof c=1 warm rep=1: 275.64s
+psycopg3-binary-copy asof c=1 warm rep=2: 274.24s
+psycopg3-binary-copy asof c=1 warm rep=3: 276.17s
+psycopg3-binary-copy asof c=1 warm rep=4: 274.50s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy asof c=1 cold rep=0: 297.90s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy asof c=1 cold rep=1: 272.54s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy asof c=1 cold rep=2: 301.16s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy asof c=1 cold rep=3: 271.57s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+psycopg3-binary-copy asof c=1 cold rep=4: 299.58s
+adbc-postgresql-arrow range c=1 warm rep=0: 21.57s
+adbc-postgresql-arrow range c=1 warm rep=1: 21.70s
+adbc-postgresql-arrow range c=1 warm rep=2: 23.42s
+adbc-postgresql-arrow range c=1 warm rep=3: 23.81s
+adbc-postgresql-arrow range c=1 warm rep=4: 21.77s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=1 cold rep=0: 26.82s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=1 cold rep=1: 26.68s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=1 cold rep=2: 26.99s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=1 cold rep=3: 26.50s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=1 cold rep=4: 27.10s
+adbc-postgresql-arrow range c=4 warm rep=0: 26.42s
+adbc-postgresql-arrow range c=4 warm rep=1: 29.11s
+adbc-postgresql-arrow range c=4 warm rep=2: 29.17s
+adbc-postgresql-arrow range c=4 warm rep=3: 26.78s
+adbc-postgresql-arrow range c=4 warm rep=4: 28.03s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=4 cold rep=0: 29.99s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=4 cold rep=1: 30.36s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=4 cold rep=2: 30.55s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=4 cold rep=3: 30.03s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow range c=4 cold rep=4: 29.29s
+adbc-postgresql-arrow object c=1 warm rep=0: 2.43s
+adbc-postgresql-arrow object c=1 warm rep=1: 2.42s
+adbc-postgresql-arrow object c=1 warm rep=2: 2.43s
+adbc-postgresql-arrow object c=1 warm rep=3: 2.43s
+adbc-postgresql-arrow object c=1 warm rep=4: 2.43s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow object c=1 cold rep=0: 73.87s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow object c=1 cold rep=1: 73.77s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow object c=1 cold rep=2: 73.97s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow object c=1 cold rep=3: 73.77s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow object c=1 cold rep=4: 73.82s
+adbc-postgresql-arrow asof c=1 warm rep=0: 274.73s
+adbc-postgresql-arrow asof c=1 warm rep=1: 278.28s
+adbc-postgresql-arrow asof c=1 warm rep=2: 278.34s
+adbc-postgresql-arrow asof c=1 warm rep=3: 281.84s
+adbc-postgresql-arrow asof c=1 warm rep=4: 280.53s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow asof c=1 cold rep=0: 305.64s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow asof c=1 cold rep=1: 279.75s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow asof c=1 cold rep=2: 304.45s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow asof c=1 cold rep=3: 276.62s
+
+ Container tlebench-timescaledb-1 Restarting 
+ Container tlebench-timescaledb-1 Started 
+
+adbc-postgresql-arrow asof c=1 cold rep=4: 304.80s
+wrote results/full-m.json
+[2026-11-13T16:04:23Z] run done
+# TLE bulk retrieval benchmark: ClickHouse vs TimescaleDB
+
+- Created: 2026-11-13T16:04:22.998245+00:00  Host: Linux-7.0.0-1014-aws-x86_64-with-glibc2.39
+- Table rows: 100,000,000  Objects: 30,000  Seed: 42  Timescale variant: compressed
+- Primary query target rows: 10,000,000  Reps: 5  Warmups: 1
+- Target: 10,000,000 rows in the client in under 5 s (verdict = p95 time-to-last-row < 5 s)
+
+Pre-run settle: clickhouse settled (329 active parts, waited 4.0 s); timescaledb settled (334 chunks, waited 4.1 s)
+
+Row-count check across databases: OK
+
+## On-disk size
+
+| DB | Table | Size | Rows |
+|---|---|---|---|
+| clickhouse | tle | 9.94 GB | 100,000,000 |
+| timescaledb | tle_columnstore | 16.25 GB | 100,000,000 |
+
+## Results
+
+| Query | DB / path | Conc | State | Rows | TTFB p50 (s) | Last p50 (s) | Last p95 (s) | Rows/s p50 | MB/s p50 | Est. 10M p95 (s, indicative only) | Verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| range | adbc-postgresql-arrow | 1 | cold | 10,000,000 | 0.408 | 26.818 | 27.079 | 372,878 | 79.8 | - | FAIL |
+| range | adbc-postgresql-arrow | 1 | warm | 10,000,000 | 0.218 | 21.772 | 23.734 | 459,307 | 98.3 | - | FAIL |
+| range | adbc-postgresql-arrow | 4 | cold | 10,000,000 | 0.419 | 29.704 | 30.370 | 336,658 | 72.0 | - | FAIL |
+| range | adbc-postgresql-arrow | 4 | warm | 10,000,000 | 0.255 | 25.407 | 29.109 | 393,643 | 84.2 | - | FAIL |
+| range | clickhouse-connect-arrow | 1 | cold | 10,000,000 | 0.060 | 4.904 | 4.976 | 2,039,064 | 436.4 | - | PASS |
+| range | clickhouse-connect-arrow | 1 | warm | 10,000,000 | 0.018 | 4.822 | 4.858 | 2,074,026 | 443.8 | - | PASS |
+| range | clickhouse-connect-arrow | 4 | cold | 10,000,000 | 0.083 | 9.548 | 12.208 | 1,047,376 | 224.1 | - | FAIL |
+| range | clickhouse-connect-arrow | 4 | warm | 10,000,000 | 0.036 | 9.052 | 11.010 | 1,104,727 | 236.4 | - | FAIL |
+| range | psycopg3-binary-copy | 1 | cold | 10,000,000 | 0.556 | 43.707 | 45.137 | 228,798 | 49.0 | - | FAIL |
+| range | psycopg3-binary-copy | 1 | warm | 10,000,000 | 0.354 | 44.796 | 46.318 | 223,233 | 47.8 | - | FAIL |
+| range | psycopg3-binary-copy | 4 | cold | 10,000,000 | 1.423 | 190.854 | 192.288 | 52,396 | 11.2 | - | FAIL |
+| range | psycopg3-binary-copy | 4 | warm | 10,000,000 | 1.416 | 191.751 | 193.999 | 52,151 | 11.2 | - | FAIL |
+| object | adbc-postgresql-arrow | 1 | cold | 3,336 | 73.815 | 73.815 | 73.952 | 45 | 0.0 | - | n/a |
+| object | adbc-postgresql-arrow | 1 | warm | 3,336 | 2.427 | 2.427 | 2.432 | 1,374 | 0.3 | - | n/a |
+| object | clickhouse-connect-arrow | 1 | cold | 3,336 | 6.987 | 12.790 | 13.054 | 261 | 0.1 | - | n/a |
+| object | clickhouse-connect-arrow | 1 | warm | 3,336 | 0.713 | 2.576 | 2.586 | 1,295 | 0.3 | - | n/a |
+| object | psycopg3-binary-copy | 1 | cold | 3,336 | 73.984 | 73.985 | 74.114 | 45 | 0.0 | - | n/a |
+| object | psycopg3-binary-copy | 1 | warm | 3,336 | 2.423 | 2.423 | 2.424 | 1,377 | 0.3 | - | n/a |
+| asof | adbc-postgresql-arrow | 1 | cold | 30,000 | 304.445 | 304.445 | 305.475 | 99 | 0.0 | - | n/a |
+| asof | adbc-postgresql-arrow | 1 | warm | 30,000 | 278.341 | 278.341 | 281.581 | 108 | 0.0 | - | n/a |
+| asof | clickhouse-connect-arrow | 1 | cold | 30,000 | 20.601 | 20.676 | 20.737 | 1,451 | 0.3 | - | n/a |
+| asof | clickhouse-connect-arrow | 1 | warm | 30,000 | 12.623 | 12.700 | 12.807 | 2,362 | 0.5 | - | n/a |
+| asof | psycopg3-binary-copy | 1 | cold | 30,000 | 297.893 | 297.895 | 300.843 | 101 | 0.0 | - | n/a |
+| asof | psycopg3-binary-copy | 1 | warm | 30,000 | 275.272 | 275.275 | 276.064 | 109 | 0.0 | - | n/a |
+
+MB/s counts decoded in-memory Arrow bytes. With concurrency > 1 each worker is one sample (one distinct window per worker). p95 over few repetitions approaches the max.
+
+[2026-11-13T16:04:23Z] ALL DONE
