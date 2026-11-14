@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import platform
+import shlex
 import subprocess
 import threading
 import time
@@ -94,12 +95,13 @@ def restart_service(
 ) -> None:
     """Restart the database and wait until a client can connect (cold-ish run).
 
-    With `cold_restart_cmd`, run that shell command instead of the local docker compose restart;
-    "{service}" is replaced by the allow-listed service name.
+    With `cold_restart_cmd`, run that program instead of the local docker compose restart. It is
+    a program plus optional fixed arguments (split with shlex rules); the allow-listed service
+    name is appended as the last argument. Nothing goes through a shell.
     """
     if cold_restart_cmd:
-        cmd = cold_restart_cmd.replace("{service}", SERVICES[db])
-        subprocess.run(cmd, shell=True, check=True)
+        argv = [*shlex.split(cold_restart_cmd), SERVICES[db]]
+        subprocess.run(argv, check=True)
     else:
         subprocess.run(["docker", "compose", "restart", SERVICES[db]], check=True)
     deadline = time.monotonic() + timeout_s

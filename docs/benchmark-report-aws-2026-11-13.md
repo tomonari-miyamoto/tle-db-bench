@@ -387,8 +387,8 @@ The repository now contains `deploy/aws/` (Terraform) with a README that gives t
 procedure: `terraform apply -var-file=rungs/<rung>.tfvars` creates or resizes the two hosts; code
 and `.env` files reach the hosts through an S3 bucket; commands run over SSM (no SSH); results are
 uploaded to the same bucket. The harness itself gained two settings for this: `BIND_ADDR` (publish
-the database ports on an interface other than loopback) and `COLD_RESTART_CMD` (an external command
-that restarts a database and drops caches on the remote host, used by `run --cold`). The laptop
+the database ports on an interface other than loopback) and `COLD_RESTART_CMD` (an external program,
+run without a shell and given the service name as its argument, that restarts a database and drops caches on the remote host, used by `run --cold`). The laptop
 procedure in the first report is unchanged.
 
 Timing per rung: generate 5 min (once), load 20 to 22 min, run with cold restarts 2 h 20 min (L)

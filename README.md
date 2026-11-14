@@ -74,9 +74,9 @@ repetition and waits until it accepts connections. This clears database caches o
 NOT drop the OS page cache. On a Linux host, drop it explicitly (`sync; echo 3 >
 /proc/sys/vm/drop_caches`, root) between reps if you need truly cold numbers.
 
-Set `COLD_RESTART_CMD` (e.g. `deploy/aws/scripts/cold-restart.sh {service}`) to replace the
-local `docker compose restart`; `{service}` is substituted with the service name and the command
-runs through the shell on the client. With it, `--cold` can reach a remote DB host and drop the
+Set `COLD_RESTART_CMD` (e.g. `deploy/aws/scripts/cold-restart.sh`) to replace the
+local `docker compose restart`; it is a program plus optional fixed arguments, the service name is
+appended as the last argument, and no shell is involved. With it, `--cold` can reach a remote DB host and drop the
 OS page cache there as part of the restart script.
 
 ## Timings

@@ -24,20 +24,25 @@ def test_restart_default_uses_docker_compose(monkeypatch):
     assert calls == [((["docker", "compose", "restart", "clickhouse"],), {"check": True})]
 
 
-def test_restart_with_cold_restart_cmd_uses_shell(monkeypatch):
+def test_restart_with_cold_restart_cmd_runs_without_shell(monkeypatch):
     calls = _record_calls(monkeypatch)
-    runner.restart_service(
-        "clickhouse", FakeFetcher, cold_restart_cmd="deploy/x.sh {service} --drop"
-    )
-    assert calls == [(("deploy/x.sh clickhouse --drop",), {"shell": True, "check": True})]
+    runner.restart_service("clickhouse", FakeFetcher, cold_restart_cmd="deploy/x.sh --drop")
+    assert calls == [((["deploy/x.sh", "--drop", "clickhouse"],), {"check": True})]
+
+
+def test_restart_cold_restart_cmd_keeps_quoted_argument(monkeypatch):
+    calls = _record_calls(monkeypatch)
+    runner.restart_service("timescaledb", FakeFetcher, cold_restart_cmd="x.sh 'a b'")
+    assert calls == [((["x.sh", "a b", "timescaledb"],), {"check": True})]
 
 
 def test_settings_cold_restart_cmd_unset_or_empty_is_none():
     assert Settings.from_env(ENV).cold_restart_cmd is None
     assert Settings.from_env({**ENV, "COLD_RESTART_CMD": ""}).cold_restart_cmd is None
+    assert Settings.from_env({**ENV, "COLD_RESTART_CMD": "  \t "}).cold_restart_cmd is None
 
 
 def test_settings_cold_restart_cmd_set_and_recorded():
-    s = Settings.from_env({**ENV, "COLD_RESTART_CMD": "x.sh {service}"})
-    assert s.cold_restart_cmd == "x.sh {service}"
-    assert s.public()["cold_restart_cmd"] == "x.sh {service}"
+    s = Settings.from_env({**ENV, "COLD_RESTART_CMD": "x.sh --fast"})
+    assert s.cold_restart_cmd == "x.sh --fast"
+    assert s.public()["cold_restart_cmd"] == "x.sh --fast"

@@ -66,8 +66,9 @@ them (step 2 and 3) with `aws s3 cp` and `chmod 600`. Use throwaway passwords.
    `s3://$BUCKET/env/client.env` to `/data/tlebench/.env`. That file holds
    `CH_HOST=$IP`, `PG_HOST=$IP`, `PG_PORT=5432`, passwords,
    `TLEBENCH_DB_INSTANCE=$DB` (the `db_instance_id` output; cold-restart.sh needs it on the client) and
-   `COLD_RESTART_CMD="deploy/aws/scripts/cold-restart.sh {service}"`. The client's instance role may
-   run commands on the DB host only; no AWS profile is needed there.
+   `COLD_RESTART_CMD=deploy/aws/scripts/cold-restart.sh`. The client's instance role may only run
+   the `tle-bench-cold-restart` SSM document on the DB host (restart one of the two services and
+   drop the page cache), no arbitrary commands; no AWS profile is needed there.
 3. DB host, via `$S/ssm.sh $DB '<command>'`: unpack the same archive into `/data/tlebench`, fetch
    `s3://$BUCKET/env/db.env` to `/data/tlebench/.env`. That file holds the rung's limits
    (`CPU_LIMIT`, `MEM_LIMIT`, `TS_TUNE_MEMORY`, `TS_TUNE_NUM_CPUS`),

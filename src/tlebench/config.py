@@ -62,7 +62,7 @@ class Settings:
             pg_user=need("PG_USER"),
             pg_password=need("PG_PASSWORD"),
             pg_database=env.get("PG_DATABASE", "bench"),
-            cold_restart_cmd=env.get("COLD_RESTART_CMD") or None,
+            cold_restart_cmd=(env.get("COLD_RESTART_CMD") or "").strip() or None,
         )
 
     def pg_uri(self) -> str:

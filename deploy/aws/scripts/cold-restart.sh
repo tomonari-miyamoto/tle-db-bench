@@ -32,5 +32,6 @@ if [ -z "${TLEBENCH_DB_INSTANCE:-}" ]; then
   export TLEBENCH_DB_INSTANCE
 fi
 
-exec "$here/ssm.sh" "$TLEBENCH_DB_INSTANCE" \
-  "cd /data/tlebench && docker compose restart $service && sync && echo 3 > /proc/sys/vm/drop_caches"
+# The document name must match aws_ssm_document.cold_restart in deploy/aws/ssm.tf.
+SSM_DOCUMENT=tle-bench-cold-restart exec "$here/ssm.sh" "$TLEBENCH_DB_INSTANCE" \
+  "$(jq -n --arg s "$service" '{service: [$s]}')"

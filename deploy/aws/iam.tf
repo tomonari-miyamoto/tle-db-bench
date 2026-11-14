@@ -44,7 +44,7 @@ resource "aws_iam_instance_profile" "db" {
 }
 
 # Client host: SSM core + S3 read/write on code, data and results, and the right to
-# run shell commands on the DB host only (used by cold-restart.sh).
+# run the tle-bench-cold-restart SSM document on the DB host (used by cold-restart.sh).
 resource "aws_iam_role" "client" {
   name               = "tle-bench-client"
   assume_role_policy = data.aws_iam_policy_document.ec2_assume.json
@@ -70,7 +70,7 @@ data "aws_iam_policy_document" "client_access" {
     actions = ["ssm:SendCommand"]
     resources = [
       aws_instance.db.arn,
-      "arn:aws:ssm:${data.aws_region.current.region}::document/AWS-RunShellScript",
+      aws_ssm_document.cold_restart.arn,
     ]
   }
 
